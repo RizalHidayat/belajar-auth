@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 // import { Link } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [res, setRes] = useState("");
+  const navigate = useNavigate();
 
   const handleEmail = (e) => {
     // console.log(e.target.value);
@@ -15,6 +17,20 @@ const Register = () => {
   const handlePassword = (e) => {
     setPassword(e.target.value);
   };
+
+  const redirect = useCallback(
+    () => navigate("/dashboard", { replace: true }),
+    [navigate]
+  );
+
+  useEffect(() => {
+    const checkIfLogin = () => {
+      const token = localStorage.getItem("token");
+      if (!token) return;
+      redirect();
+    };
+    checkIfLogin();
+  }, [redirect]);
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -37,24 +53,24 @@ const Register = () => {
         </div>
         <div className="col-4">
           <div className="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">
+            <label htmlFor="exampleFormControlInput1" className="form-label">
               Email address
             </label>
             <input
               type="email"
-              class="form-control"
+              className="form-control"
               id="exampleFormControlInput1"
               placeholder="name@example.com"
               onChange={(e) => handleEmail(e)}
             ></input>
           </div>
-          <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">
+          <div className="mb-3">
+            <label htmlFor="exampleInputPassword1" className="form-label">
               Password
             </label>
             <input
               type="password"
-              class="form-control"
+              className="form-control"
               id="exampleInputPassword1"
               placeholder="password"
               onChange={(e) => handlePassword(e)}
