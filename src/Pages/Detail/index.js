@@ -51,7 +51,7 @@ const Detail = () => {
 
   return (
     <div>
-      <h1>ini detail</h1>
+      <h1>ini edit data</h1>
       <br />
       <form onSubmit={handleSubmit}>
         <div>

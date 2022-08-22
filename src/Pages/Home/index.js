@@ -5,8 +5,12 @@ const Home = () => {
   return (
     <div>
       <h1>haloo</h1>
-      <Link to="/register">Daftar</Link>
-      <Link to="/login">Login</Link>
+      <button>
+        <Link to="/register">Daftar</Link>
+      </button>
+      <button>
+        <Link to="/login">Login</Link>
+      </button>
     </div>
   );
 };
